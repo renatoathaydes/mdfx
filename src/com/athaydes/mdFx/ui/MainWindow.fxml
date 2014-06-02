@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.WebView?>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.athaydes.mdFx.ui.MainWindow">
+    <top>
+        <VBox fx:id="topBox" prefHeight="48.0" prefWidth="600.0" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Button mnemonicParsing="false" onAction="#openMarkdown" text="Open"/>
+                        <Button mnemonicParsing="false" onAction="#saveMarkdown" text="Save markdown as ..."/>
+                        <Button mnemonicParsing="false" onAction="#saveHtml" text="Save Html as ..."/>
+                        <Button mnemonicParsing="false" onAction="#settings" text="Options"/>
+                    </children>
+                </HBox>
+            </children>
+            <padding>
+                <Insets left="20.0" top="20.0" bottom="10"/>
+            </padding>
+        </VBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
+                   prefWidth="800.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TextArea fx:id="textInput" layoutX="-43.0" layoutY="48.0" onKeyTyped="#textInputChanged"
+                                  prefHeight="277.0" prefWidth="149.0" AnchorPane.bottomAnchor="0.0"
+                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="296.0">
+                    <children>
+                        <WebView fx:id="webView" layoutX="48.0" layoutY="30.0" prefHeight="398.0" prefWidth="295.0"
+                                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                 AnchorPane.topAnchor="0.0"/>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>

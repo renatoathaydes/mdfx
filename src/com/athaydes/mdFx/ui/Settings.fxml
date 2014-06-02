@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<GridPane minHeight="200" minWidth="500" prefHeight="154.0" prefWidth="600.0"
+          xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets left="20.0" right="20" top="20.0" bottom="20"/>
+    </padding>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <Label text="HTML refresh rate:"/>
+        <Label text="File saving rate" GridPane.rowIndex="1"/>
+        <Label text="Show file names" GridPane.rowIndex="2"/>
+        <TextField fx:id="htmlRefreshRate" onAction="#setHtmlRefreshRate" GridPane.columnIndex="1"/>
+        <TextField fx:id="fileSavingRate" onAction="#setFileSavingRate" GridPane.columnIndex="1"
+                      GridPane.rowIndex="1"/>
+        <CheckBox fx:id="showFileNames" onAction="#setShowFileNames" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    </children>
+</GridPane>
