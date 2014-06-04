@@ -1,6 +1,6 @@
 package com.athaydes.mdFx.ui
 
-import javafx.event.ActionEvent
+import javafx.beans.InvalidationListener
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.control.CheckBox
@@ -37,6 +37,12 @@ class Settings extends GridPane {
         htmlRefreshRate.text = mainWindow.htmlRefreshInMillis.toString()
         fileSavingRate.text = mainWindow.fileRefreshInMillis.toString()
         showFileNames.selected = mainWindow.showFileNames
+        htmlRefreshRate.focusedProperty().addListener( {
+            setHtmlRefreshRate()
+        } as InvalidationListener )
+        fileSavingRate.focusedProperty().addListener( {
+            setFileSavingRate()
+        } as InvalidationListener )
     }
 
     @FXML
@@ -49,7 +55,7 @@ class Settings extends GridPane {
     }
 
     @FXML
-    void setFileSavingRate( ActionEvent actionEvent ) {
+    void setFileSavingRate() {
         try {
             mainWindow.fileRefreshInMillis = fileSavingRate.text as long
         } catch ( e ) {
@@ -58,7 +64,7 @@ class Settings extends GridPane {
     }
 
     @FXML
-    void setShowFileNames( ActionEvent actionEvent ) {
+    void setShowFileNames() {
         mainWindow.showFileNames = showFileNames.selected
     }
 

@@ -34,6 +34,9 @@ class MainWindow extends BorderPane {
     private final processor = new MarkdownProcessor()
     private final htmlNeedsUpdate = new AtomicBoolean()
     private final filesNeedUpdate = new AtomicBoolean()
+    private final Timer timer = new Timer( 'MdFxUpdateTasks', true )
+    private TimerTask updateFilesTask
+    private TimerTask updateHtmlTask
     private volatile String html = ''
 
     long htmlRefreshInMillis = 250
@@ -43,28 +46,34 @@ class MainWindow extends BorderPane {
     volatile File htmlFile
 
     MainWindow() {
-        watchForHtmlUpdates()
-        watchForFileUpdates()
+        setHtmlRefreshInMillis htmlRefreshInMillis
+        setFileRefreshInMillis fileRefreshInMillis
     }
 
-    private watchForFileUpdates() {
-        new Timer( true ).schedule( {
-            if ( filesNeedUpdate.getAndSet( false ) ) {
-                markdownFile?.write textInput.text, "UTF-8"
-                htmlFile?.write html, "UTF-8"
-            }
-        } as TimerTask, 4_000, fileRefreshInMillis )
-    }
-
-    private watchForHtmlUpdates() {
-        new Timer( true ).schedule( {
+    void setHtmlRefreshInMillis( long millis ) {
+        this.htmlRefreshInMillis = millis
+        updateHtmlTask?.cancel()
+        updateHtmlTask = {
             if ( htmlNeedsUpdate.getAndSet( false ) ) {
                 html = processor.markdown( textInput.text )
                 Platform.runLater {
                     webView.engine.loadContent html
                 }
             }
-        } as TimerTask, 1_000, htmlRefreshInMillis )
+        } as TimerTask
+        timer.schedule( updateHtmlTask, htmlRefreshInMillis, htmlRefreshInMillis )
+    }
+
+    void setFileRefreshInMillis( long millis ) {
+        this.fileRefreshInMillis = millis
+        updateFilesTask?.cancel()
+        updateFilesTask = {
+            if ( filesNeedUpdate.getAndSet( false ) ) {
+                markdownFile?.write textInput.text, "UTF-8"
+                htmlFile?.write html, "UTF-8"
+            }
+        } as TimerTask
+        timer.schedule( updateFilesTask, fileRefreshInMillis, fileRefreshInMillis )
     }
 
     @FXML
