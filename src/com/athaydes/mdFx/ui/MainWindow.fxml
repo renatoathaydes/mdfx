@@ -25,8 +25,8 @@
         </VBox>
     </top>
     <center>
-        <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
-                   prefWidth="800.0">
+        <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity"
+                   prefHeight="1600.0" prefWidth="1800.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                     <children>
